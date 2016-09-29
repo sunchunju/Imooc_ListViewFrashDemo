@@ -37,6 +37,8 @@ public class ReFlashListView extends ListView implements AbsListView.OnScrollLis
 
     int scrollState;//listview当前的滚动状态
 
+    private ReflashDataListener mReflashDataListener;
+
     public ReFlashListView(Context context) {
         this(context, null);
     }
@@ -114,6 +116,7 @@ public class ReFlashListView extends ListView implements AbsListView.OnScrollLis
                 if (state == RELEASE){
                     //如果是“松开可以刷新”状态，转变状态，并且刷新数据
                     state = REFLASHING;
+                    mReflashDataListener.onRelashData();
                 }else if (state == PULL){
                     //在提示“下拉可以刷新”状态抬起，恢复当前状态，并且将标记为重置
                     state = NORMAL;
@@ -167,7 +170,7 @@ public class ReFlashListView extends ListView implements AbsListView.OnScrollLis
 
     /**
      * 根据当前状态改变界面显示*/
-    private void reflashViewByState(){
+    public void reflashViewByState(){
         TextView tip = (TextView) headerView.findViewById(R.id.tv_tip);
         ImageView arrow = (ImageView) headerView.findViewById(R.id.iv_arrow);
         ProgressBar progressBar = (ProgressBar) headerView.findViewById(R.id.progress);
@@ -218,5 +221,13 @@ public class ReFlashListView extends ListView implements AbsListView.OnScrollLis
         lastupdateTime.setText(time);
         setTopPadding(-headerHeight);
         invalidate();
+    }
+
+    public interface ReflashDataListener{
+        public void onRelashData();
+    }
+
+    public void setmReflashDataListener(ReflashDataListener mReflashDataListener) {
+        this.mReflashDataListener = mReflashDataListener;
     }
 }
