@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="30dp"
     tools:context=".MainActivity"
     >
 
@@ -33,15 +33,16 @@
         android:src="@drawable/pull_to_refresh_arrow"
         android:layout_toLeftOf="@+id/id_layout"
         android:paddingRight="10dp"
-        android:id="@+id/iv_arrow"/>
+        android:id="@+id/iv_arrow"
+        android:visibility="visible"/>
 
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progress"
-        style="?android:attr/progressBarStyleSmall"
+        style="?android:attr/progressBarStyle"
         android:layout_toLeftOf="@+id/id_layout"
-        android:layout_centerVertical="true"
+        android:layout_alignBaseline="@id/id_layout"
         android:paddingRight="10dp"
         android:visibility="gone"/>
 
